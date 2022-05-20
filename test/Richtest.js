@@ -22,7 +22,7 @@ context("token details", async () => {
     })
     it("should have the right decimals", async () => {
         const decimals = await contractInstance.decimals();
-        expect(decimals).be.a.bignumber.that.equals('18');
+        expect(decimals).to.be.a.bignumber.that.equals('18');
      })
 })
 })
