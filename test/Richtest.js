@@ -8,8 +8,12 @@ chai.use(require('chai-bn')(BN));
 contract("Richtoken", () => {
     let contractInstance;
 
+    const _name = "Rich"
+    const _symbol = "RTK"
+    const _decimals = "18"
+
     beforeEach(async () => {
-        contractInstance = await Richtoken.new();
+        contractInstance = await Richtoken.new(_name, _symbol, _decimals);
     });
 context("token details", async () => {
     it("should have right token name", async () => {
