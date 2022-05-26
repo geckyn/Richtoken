@@ -48,4 +48,17 @@ context("Mintable behaviour", async () => {
         assert.equal(await tokenInstance.isMinter(deployer), false);
     })
 })
+context("Crowdsale purchases", async () => {
+    it("should not have an initial supply", async () => {
+        const supply = await tokenInstance.totalSupply();
+        expect(supply).to.be.a.bignumber.that.equals("0");
+    })
+    it("should mint tokens when purchased", async () => {
+        const supply = await tokenInstance.totalSupply();
+        await crowdsaleInstance.sendTransaction({ value: 200000000, from: investor1 });
+        const newsupply = await tokenInstance.totalSupply();
+        expect(newsupply).to.be.a.bignumber.greaterThan(supply);
+    })
+})
+
 })
