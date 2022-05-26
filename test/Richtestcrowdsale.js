@@ -41,12 +41,11 @@ context("Crowdsale details", async () => {
     })
 })
 context("Mintable behaviour", async () => {
-    it("should not be able to mint by default", async () => {
-        assert.equal(await tokenInstance.isMinter(crowdsaleInstance.address), false);
-    })
-    it("should be able to mint only when granted", async () => {
-        await tokenInstance.addMinter(crowdsaleInstance.address);
+    it("should be able to mint tokens", async () => {
         assert.equal(await tokenInstance.isMinter(crowdsaleInstance.address), true);
+    })
+    it("ensures deployer is not a Minter", async () => {
+        assert.equal(await tokenInstance.isMinter(deployer), false);
     })
 })
 })
