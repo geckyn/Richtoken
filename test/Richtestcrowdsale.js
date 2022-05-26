@@ -23,6 +23,8 @@ contract("RichCrowdsale", (accounts) => {
     beforeEach(async () => {
         tokenInstance = await Richtoken.new(_name, _symbol, _decimals, {from: deployer});
         crowdsaleInstance = await RichCrowdsale.new(rate, wallet, tokenInstance.address);
+        await tokenInstance.addMinter(crowdsaleInstance.address, { from: deployer}); //transfer minting to Crowsdale
+        await tokenInstance.renounceMinter(); // renounce minter role from deployer
     });
 context("Crowdsale details", async () => {
     it("should have correct rate", async () => {
