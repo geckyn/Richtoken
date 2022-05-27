@@ -15,4 +15,8 @@ module.exports = async function (deployer, accounts) {
   const token = deployedToken.address;
 
   await deployer.deploy(RichCrowdsale, rate, wallet, token);
+  const deployedCrowdsale = await RichCrowdsale.deployed();
+
+  await deployedToken.addMinter(deployedCrowdsale.address);
+  await deployedToken.renounceMinter();
 };
